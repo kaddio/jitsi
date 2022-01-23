@@ -24,8 +24,30 @@
             parentNode: document.querySelector('#jaas-container'),
             jwt: findGetParameter('jwt'),
             configOverwrite: {
-                subject: ' '
-            }
+                ...JSON.parse(findGetParameter('config'))
+            },
+            // configOverwrite: {
+            //     prejoinPageEnabled: false,
+            //     readOnlyName: true,
+            //     subject: ' ',
+            //     disablePolls: true,
+            //     disableReactions: true,
+            //     fileRecordingsEnabled: false,
+            //     liveStreamingEnabled: false,
+            //     transcribeWithAppLanguage: false,
+            //     toolbarButtons: [
+            //         'camera',
+            //         'hangup',
+            //         'toggle-camera',
+            //         'tileview',
+            //         'select-background',
+            //         'raisehand',
+            //         'participants-pane',
+            //         'microphone',
+            //         'fullscreen',
+            //         'invite'
+            //     ]
+            // }
         });
         }
     </script>
