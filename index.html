@@ -18,10 +18,35 @@
             return result;
         }
 
-        const configOverwrite = {
-            ...JSON.parse(findGetParameter('config'))
-        }
+        const defaultconfigOverwrite = {
+            prejoinPageEnabled: false,
+            readOnlyName: true,
+            subject: 'Kaddio',
+            disablePolls: true,
+            disableReactions: true,
+            fileRecordingsEnabled: false,
+            liveStreamingEnabled: false,
+            transcribeWithAppLanguage: false,
+            toolbarButtons: [
+                'camera',
+                'hangup',
+                'toggle-camera',
+                'tileview',
+                'select-background',
+                'raisehand',
+                'participants-pane',
+                'microphone',
+                'fullscreen',
+                'invite'
+            ]
+        }            
 
+        const config = findGetParameter('config');
+
+        const configOverwrite = (config) ? JSON.parse(config) : defaultconfigOverwrite;
+
+        console.log(defaultconfigOverwrite);
+        console.log(JSON.parse(config));
         console.log(configOverwrite);
 
         window.onload = () => {
@@ -32,28 +57,7 @@
             configOverwrite: {
                 ...configOverwrite
             },
-            // configOverwrite: {
-            //     prejoinPageEnabled: false,
-            //     readOnlyName: true,
-            //     subject: ' ',
-            //     disablePolls: true,
-            //     disableReactions: true,
-            //     fileRecordingsEnabled: false,
-            //     liveStreamingEnabled: false,
-            //     transcribeWithAppLanguage: false,
-            //     toolbarButtons: [
-            //         'camera',
-            //         'hangup',
-            //         'toggle-camera',
-            //         'tileview',
-            //         'select-background',
-            //         'raisehand',
-            //         'participants-pane',
-            //         'microphone',
-            //         'fullscreen',
-            //         'invite'
-            //     ]
-            // }
+
         });
         }
     </script>
