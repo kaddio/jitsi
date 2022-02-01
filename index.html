@@ -50,15 +50,14 @@
         console.log(configOverwrite);
 
         window.onload = () => {
-        const api = new JitsiMeetExternalAPI("8x8.vc", {
-            roomName: findGetParameter('room'),
-            parentNode: document.querySelector('#jaas-container'),
-            jwt: findGetParameter('jwt'),
-            configOverwrite: {
-                ...configOverwrite
-            },
-
-        });
+            const api = new JitsiMeetExternalAPI("8x8.vc", {
+                roomName: findGetParameter('room'),
+                parentNode: document.querySelector('#jaas-container'),
+                jwt: findGetParameter('jwt'),
+                configOverwrite: {
+                    ...configOverwrite
+                }
+            });
         }
     </script>
     </head>
