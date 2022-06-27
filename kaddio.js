@@ -4,6 +4,8 @@ function kaddio(url){
         return;
     };
 
+    url = (url.search('//')) ? url : `https://${url}.kaddio.com`;
+
     const offset = new Date().getTimezoneOffset();
 
     const options = {
