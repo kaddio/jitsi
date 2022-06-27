@@ -24,7 +24,7 @@ function kaddio(url){
     }
 
     nodes.forEach(n => {
-        fetch(`https://${url}.kaddio.com/api/next-free-time/${n.dataset.kaddio}`, options)
+        fetch(`${url}/api/next-free-time/${n.dataset.kaddio}`, options)
             .then(response => response.json())
             .then(data => {
                 if(data.nextFreeTime){
