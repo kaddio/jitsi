@@ -31,13 +31,18 @@ function kaddio(url){
                 if(data.nextFreeTime){
                     console.log(data);
     
-                    n.insertAdjacentHTML('afterend', "<div>" + data.nextFreeTime + "</div");
+                    n.insertAdjacentHTML('afterbegin', "<div>" + data.nextFreeTime + "</div");
     
                     if(data.localDate){
-                        n.insertAdjacentHTML('afterend', "<div>" + data.localDate + " (lokal tid)</div")
+                        n.insertAdjacentHTML('afterbegin', "<div>" + data.localDate + " (lokal tid)</div")
                     }
     
-                    n.insertAdjacentHTML('afterend', `<a href="${data.link}">Boka</a>`)
+                    const bookNode = n.querySelector("[data-kaddio-book]");
+
+                    if(data.link && bookNode){
+                        bookNode.setAttribute('href', data.link);
+                        // n.insertAdjacentHTML('afterend', `<a href="${data.link}">Boka</a>`)
+                    }
                 }
             })
     
