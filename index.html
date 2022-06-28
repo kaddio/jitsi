@@ -60,6 +60,8 @@
                     ...configOverwrite
                 }
             });
+
+            api.addListener('readyToClose', () => window.close());
         }
     </script>
     </head>
