@@ -7,15 +7,34 @@
         Kaddio.js (Kaddio Client library)
         Copyright Kaddio AB, https://kaddio.com
 
-        Kaddio.js is experimental 🤓
+        Welcome to the Ultra simple Kaddio Client Library!
 
+        Pick your level of difficulty to get started
+
+        ## Level 1 - Piece of Cake
+        Don't use this, use Kaddio Booking Iframe solution instead: https://kaddio.com/iframe
+
+
+        ## Level 2 - Let's rock
         1. Include the Kaddio Client library on your site.
-
-        2. Instruct kaddio.js where to fetch the data from by providing your full URL in the "data-url" attribute on the script tag
-        
+        2. Instruct kaddio.js where to fetch your data from by providing your full URL in the "data-url" attribute on the script tag     
         3. Markup your HTML with data-attributes to enrich your site with free times for specific search queries
 
-        Be aware of CORS, Kaddio server sends
+
+        ## Level 3 - Come get some
+        1. Set data-disable-autostart="true" on the script tag.
+        2. Use the Kaddio.js API directly to fetch suggestions, book and more.
+
+
+        ## Level 4 - Damn I'm good
+        Use Kaddio GraphQL API for server-to-server communication instead of this bs.
+
+        
+
+        ## Gotchas
+        🤮 CORS, Kaddio servers sends the header "Access-Control-Allow-Origin" with the Allow Iframe Settings in Kaddio. You might need to adjust that.
+        🤩 Dates are UTC if not otherwise stated.
+        🤓 Charset is UTF-8.
     -->
 
     <script src="kaddio-v2.js" data-url="http://localhost:3000" defer></script>
@@ -34,7 +53,7 @@
 
         <div class="host">
             <strong>All bookable times</strong>
-            <div data-kaddio></div>
+            <div data-kaddio data-kaddio-book="tue"></div>
         </div>
 
         <div class="host">
