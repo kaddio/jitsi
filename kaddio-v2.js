@@ -37,15 +37,21 @@ class Kaddio{
         nodes.forEach(async n => {
             const suggestions = await this.suggestions(n.dataset.kaddio);
 
-            if(suggestions){
-                console.log(suggestions);
+            if(!suggestions) return;
 
-                const bookingTypes = Object.keys(suggestions);
+            console.log(suggestions);
 
-                bookingTypes.forEach(bt => {
-                    suggestions[bt].forEach(suggestion => {
-                        n.insertAdjacentHTML('afterbegin', "<div>" + suggestion.start + "</div");
-                    });
+            const bookingTypes = Object.keys(suggestions);
+
+            bookingTypes.forEach(bt => {
+                suggestions[bt].forEach(suggestion => {
+                    if(n.dataset.kaddioBook){
+                        n.insertAdjacentHTML('afterbegin', `<a href="${suggestion.link}">${suggestion.start}</a`);
+                    }
+                    else{
+                        n.insertAdjacentHTML('afterbegin', `<div>${suggestion.start}</div`);
+                    }
+
 
                     // if(data.localDate){
                     //     n.insertAdjacentHTML('afterbegin', "<div>" + data.localDate + " (lokal tid)</div")
@@ -56,16 +62,15 @@ class Kaddio{
                     // if(data.link && bookNode){
                     //     bookNode.setAttribute('href', data.link);
                     //     // n.insertAdjacentHTML('afterend', `<a href="${data.link}">Boka</a>`)
-                    // }
+                    // }                        
                 });
-
-            }        
+            });
         });   
     }
 
     async book(reservation){
         const options = {
-            mode: 'cors',
+            body: JSON.stringify(reservation),
             method: 'POST',
             headers: {
                 'x-tz-offset': this.offset
@@ -88,6 +93,10 @@ else{
     kaddio.parse();
 }
 
-const kaddio = new Kaddio(document.currentScript.dataset.url);
+// const kaddio = new Kaddio(document.currentScript.dataset.url);
 
-kaddio.book();
+// kaddio.book({
+//     bookableTimeId: "xpcmCjN8TeAhPAdpT",
+//     bookingTypeId: "Qg6u5fPhyXzhuspnH",
+
+// });
