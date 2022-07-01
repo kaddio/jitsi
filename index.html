@@ -24,7 +24,11 @@
             subject: 'Kaddio',
             disablePolls: true,
             disableReactions: true,
-            fileRecordingsEnabled: false,
+            recordingService: {
+                enabled: false,
+                sharingEnabled: false,
+                hideStorageWarning: false
+            },
             liveStreamingEnabled: false,
             transcribeWithAppLanguage: false,
             toolbarButtons: [
@@ -45,7 +49,7 @@
 
         const configOverwrite = (config) ? JSON.parse(config) : defaultconfigOverwrite;
 
-        console.log(defaultconfigOverwrite);
+        // console.log(defaultconfigOverwrite);
         console.log(JSON.parse(config));
         console.log(configOverwrite);
 
@@ -60,7 +64,7 @@
                     ...configOverwrite
                 }
             });
-
+            
             api.addListener('readyToClose', () => window.close());
         }
     </script>
