@@ -1,16 +1,19 @@
 class Kaddio{
     url;
     offset;
+    locale;
+    localeOptions;
 
-    constructor(url){
-        if(!url){
+    constructor(options){
+        if(!options.url){
             console.log('Kaddio: URL missing')
             throw new Error();
         };
     
-        this.url = (url.search('//')) ? url : `https://${url}.kaddio.com`;
-
+        this.url = (options.url.search('//')) ? options.url : `https://${options.url}.kaddio.com`;
         this.offset = new Date().getTimezoneOffset();
+        this.locale = navigator.language;
+        this.localeOptions = (options.localeOptions) ? JSON.parse(options.localeOptions) : { weekday:"long", year:"numeric", month:"short", day:"numeric", hour: "numeric", minute: "numeric"};
     }
 
     async suggestions(query){
@@ -26,6 +29,14 @@ class Kaddio{
         return await response.json();
     }
 
+    dateOffset(dateStr){
+        const d = new Date(dateStr);
+
+        const ms = d.getTime();
+        const localDateInMs = ms - this.offset * 60000;
+        return new Date(localDateInMs).toLocaleDateString(this.locale, this.localeOptions);
+    }
+
     async parse(){            
         const nodes = document.querySelectorAll("[data-kaddio]");
     
@@ -39,19 +50,21 @@ class Kaddio{
 
             if(!suggestions) return;
 
-            console.log(suggestions);
+            // console.log(suggestions);
 
             const bookingTypes = Object.keys(suggestions);
 
             bookingTypes.forEach(bt => {
                 suggestions[bt].forEach(suggestion => {
+
+                    const localDate = this.dateOffset(suggestion.start, this.localeOptions);
+
                     if(n.dataset.kaddioBook){
-                        n.insertAdjacentHTML('afterbegin', `<a href="${suggestion.link}">${suggestion.start}</a`);
+                        n.insertAdjacentHTML('afterbegin', `<a href="${suggestion.link}">${localDate}</a`);
                     }
                     else{
-                        n.insertAdjacentHTML('afterbegin', `<div>${suggestion.start}</div`);
+                        n.insertAdjacentHTML('afterbegin', `<div>${localDate}</div`);
                     }
-
 
                     // if(data.localDate){
                     //     n.insertAdjacentHTML('afterbegin', "<div>" + data.localDate + " (lokal tid)</div")
@@ -89,7 +102,7 @@ if(document.currentScript.dataset.disableAutostart){
 }
 
 else{
-    const kaddio = new Kaddio(document.currentScript.dataset.url);
+    const kaddio = new Kaddio(document.currentScript.dataset);
     kaddio.parse();
 }
 
