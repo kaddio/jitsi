@@ -46,10 +46,8 @@
         }            
 
         const config = findGetParameter('config');
-
         const configOverwrite = (config) ? JSON.parse(config) : defaultconfigOverwrite;
 
-        // console.log(defaultconfigOverwrite);
         console.log(JSON.parse(config));
         console.log(configOverwrite);
 
@@ -64,7 +62,7 @@
                     ...configOverwrite
                 }
             });
-            
+
             api.addListener('readyToClose', () => window.close());
         }
     </script>
