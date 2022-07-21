@@ -60,7 +60,7 @@ class Kaddio{
                     const localDate = this.dateOffset(suggestion.start, this.localeOptions);
 
                     if(n.dataset.kaddioBook){
-                        n.insertAdjacentHTML('afterbegin', `<a href="${suggestion.link}">${localDate}</a`);
+                        n.insertAdjacentHTML('afterbegin', `<a href="${suggestion.reserveLink}">${localDate}</a`);
                     }
                     else{
                         n.insertAdjacentHTML('afterbegin', `<div>${localDate}</div`);
